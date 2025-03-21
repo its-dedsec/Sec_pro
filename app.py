@@ -4,7 +4,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, Attention
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 import numpy as np
-import cv2
+import cv2  # Import OpenCV
 import os
 from PIL import Image
 import json
@@ -222,6 +222,11 @@ def main():
     """
     st.title("Deepfake Detection and Risk Assessment")
 
+    # Check if OpenCV is installed
+    if 'cv2' not in globals():
+        st.error("OpenCV is not installed. Please install it using: `pip install opencv-python` and restart the app.")
+        return  # Stop the app if OpenCV is not installed
+
     uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
     if uploaded_file is not None:
@@ -269,6 +274,7 @@ def main():
         -   The accuracy of the model depends on the quality and training data.
         -   This app is for research and demonstration purposes only.
         -   The risk assessment is based on heuristics and should not be considered definitive.
+        -   **Important:** This app requires OpenCV. If you encounter an error, please install it using `pip install opencv-python` and restart the app.
         """
     )
     st.subheader("Hyperparameter Tuning Suggestions")
